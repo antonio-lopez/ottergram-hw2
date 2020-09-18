@@ -147,7 +147,7 @@ a {
 @media all and (min-width: 768px) {
 
     .main-content {
-        flex-direction: row;   
+        flex-direction: row;
         overflow: hidden;
     }
 
@@ -162,7 +162,19 @@ a {
         max-width: 260px;
     }
 
-    .thumbnail-item + .thumbnail-item {
+    .thumbnail-item+.thumbnail-item {
         margin-top: 20px;
     }
+}
+
+/* Previous and Next button styles */
+.nextprev {
+    display: inline-block;
+    font-size: 10em;
+    padding: 10px 16px;
+    text-decoration: none;
+}
+
+.buttonColor {
+    color: rgb(132, 131, 143);
 }

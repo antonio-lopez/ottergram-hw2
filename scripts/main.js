@@ -33,7 +33,7 @@ function setDetailsFromThumb(thumbnail) {
 
 function addThumbClickHandler(thumb) {
     'use strict';
-    thumb.addEventListener('click', function(event){
+    thumb.addEventListener('click', function (event) {
         event.preventDefault();
         setDetailsFromThumb(thumb);
         showDetails();
@@ -59,14 +59,14 @@ function showDetails() {
     var frame = document.querySelector(DETAIL_FRAME_SELECTOR);
     document.body.classList.remove(HIDDEN_DETAIL_CLASS);
     frame.classList.add(TINY_EFFECT_CLASS);
-    setTimeout(function() {
+    setTimeout(function () {
         frame.classList.remove(TINY_EFFECT_CLASS);
     }, 50);
 }
 
 function addKeyPressHandler() {
     'use strict';
-    document.body.addEventListener('keyup', function(event) {
+    document.body.addEventListener('keyup', function (event) {
         event.preventDefault();
         if (event.keyCode === ESC_KEY) {
             hideDetails();
@@ -79,6 +79,52 @@ function initializeEvents() {
     var thumbnails = getThumbnailsArray();
     thumbnails.forEach(addThumbClickHandler);
     addKeyPressHandler();
+
+    // Previous and Next Buttons
+    document.getElementById("previous").addEventListener("click", function (event) {
+        event.preventDefault();
+        prevButton();
+    });
+
+    document.getElementById("next").addEventListener("click", function (event) {
+        event.preventDefault();
+        nextButton();
+    });
 }
 
 initializeEvents();
+
+function getImagesArray() {
+    "use strict";
+    var imgArray = getThumbnailsArray();
+    for (var i = 0; i < imgArray.length; i++) {
+        imgArray[i] = imgArray[i].href;
+    }
+    return imgArray;
+}
+
+function prevButton() {
+    var imgArray = getImagesArray();
+    var thumbArray = getThumbnailsArray();
+    var curr = imgArray.indexOf(document.getElementById("detail-image").src);
+    if (curr == 0) {
+        curr = imgArray.length - 1;
+    } else {
+        curr = curr - 1;
+    }
+    //console.log(curr);
+    thumbArray[curr].click();
+}
+
+function nextButton() {
+    var imgArray = getImagesArray();
+    var thumbArray = getThumbnailsArray();
+    var curr = imgArray.indexOf(document.getElementById("detail-image").src);
+    if (curr == 4) {
+        curr = 0;
+    } else {
+        curr = curr + 1;
+    }
+    //console.log(curr);
+    thumbArray[curr].click();
+}
